@@ -38,6 +38,14 @@ export class TeamRegistrationComponent {
     private snackBar: MatSnackBar
   ) {}
 
+  // Forçar que el camp perdi el focus després de cada lletra
+  onKeyUp(event: KeyboardEvent): void {
+    const target = event.target as HTMLInputElement;
+    if (target) {
+      target.blur();
+    }
+  }
+
   onSubmit(): void {
     // Validate team name
     if (!this.teamName.trim()) {
