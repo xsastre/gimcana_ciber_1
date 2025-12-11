@@ -1,0 +1,57 @@
+<div class="level-complete-container">
+  <mat-card class="celebration-card">
+    <mat-card-content>
+      <div class="celebration-icon">
+        <mat-icon>celebration</mat-icon>
+      </div>
+
+      <h1>NIVELL {{ completedLevel }} COMPLETAT!</h1>
+      <h2>{{ levelTitle }}</h2>
+
+      <p class="description">{{ levelDescription }}</p>
+
+      <div class="stats">
+        <div class="stat-item">
+          <mat-icon>emoji_events</mat-icon>
+          <div class="stat-value">{{ currentTeam?.score }}</div>
+          <div class="stat-label">Punts totals</div>
+        </div>
+
+        <div class="stat-item">
+          <mat-icon>check_circle</mat-icon>
+          <div class="stat-value">{{ currentTeam ? currentTeam.currentQuestion - 1 : 0 }}</div>
+          <div class="stat-label">Qüestions completades</div>
+        </div>
+
+        <div class="stat-item">
+          <mat-icon>speed</mat-icon>
+          <div class="stat-value">Nivell {{ completedLevel }}</div>
+          <div class="stat-label">Progrés</div>
+        </div>
+      </div>
+
+      <div class="next-level" *ngIf="completedLevel < 3">
+        <h3>
+          <mat-icon>arrow_forward</mat-icon>
+          Següent: {{ nextLevelTitle }}
+        </h3>
+        <p>Prepara't per afrontar nous reptes!</p>
+      </div>
+
+      <div class="final-challenge-info" *ngIf="completedLevel === 3">
+        <h3>
+          <mat-icon>assignment</mat-icon>
+          Ara ve el Desafiament Final!
+        </h3>
+        <p>Posa en pràctica tot el que has après amb un cas real d'auditoria.</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="continue()">
+        <mat-icon>play_arrow</mat-icon>
+        {{ completedLevel === 3 ? 'Desafiament Final' : 'Continuar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
