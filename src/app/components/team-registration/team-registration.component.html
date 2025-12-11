@@ -13,7 +13,7 @@
       <form #teamForm="ngForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Nom de l'equip</mat-label>
-          <input matInput [(ngModel)]="teamName" name="teamName" required (keyup)="onKeyUp($event)">
+          <input matInput [(ngModel)]="teamName" name="teamName" required>
           <mat-icon matPrefix>group</mat-icon>
         </mat-form-field>
         
@@ -25,7 +25,7 @@
           
           <mat-form-field appearance="outline" class="full-width" *ngFor="let member of members; let i = index">
             <mat-label>Membre {{ i + 1 }}{{ i < 3 ? ' *' : '' }}</mat-label>
-            <input matInput [(ngModel)]="members[i]" [name]="'member' + i" [required]="i < 3" (keyup)="onKeyUp($event)">
+            <input matInput [(ngModel)]="members[i]" [name]="'member' + i" [required]="i < 3">
             <mat-icon matPrefix>person</mat-icon>
           </mat-form-field>
         </div>
@@ -33,7 +33,6 @@
         <div class="info-box">
           <mat-icon>info</mat-icon>
           <p>Mínim 3 membres i màxim 4. Els tres primers són obligatoris.</p>
-          <p><strong>Important:</strong> Després de cada lletra escrita, hauràs de fer clic novament al camp per continuar escrivint.</p>
         </div>
       </form>
     </mat-card-content>
