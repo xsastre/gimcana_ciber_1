@@ -1,0 +1,129 @@
+<div class="final-challenge-container">
+  <div class="header">
+    <div class="team-info">
+      <mat-icon>group</mat-icon>
+      <span>{{ currentTeam?.name }}</span>
+    </div>
+    <div class="score-info">
+      <mat-icon>emoji_events</mat-icon>
+      <span>{{ currentTeam?.score }} punts</span>
+    </div>
+  </div>
+
+  <mat-card class="challenge-card" *ngIf="!showResult">
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon>assignment</mat-icon>
+        {{ caseData.title }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        Auditoria de Compliance Penal - Puntuació màxima: 100 punts
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="case-description" [innerHTML]="caseData.description"></div>
+
+      <form class="challenge-form">
+        <h3>Les Vostres Respostes</h3>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>1. Riscos penals identificats (mínim 5)</mat-label>
+          <textarea 
+            matInput 
+            [(ngModel)]="answers.penalRisks" 
+            name="penalRisks"
+            rows="6"
+            placeholder="Identifiqueu i descriviu almenys 5 riscos penals presents en el cas..."></textarea>
+          <mat-hint>Penseu en tots els delictes que podrien haver-se comès</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>2. Normatives violades</mat-label>
+          <textarea 
+            matInput 
+            [(ngModel)]="answers.violatedNorms" 
+            name="violatedNorms"
+            rows="5"
+            placeholder="Indiqueu quines normatives específiques s'han violat (RGPD, Codi Penal, ISO 37001, UNE 19601...)"></textarea>
+          <mat-hint>Sigues específic amb les lleis i normatives</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>3. Mesures immediates a implementar</mat-label>
+          <textarea 
+            matInput 
+            [(ngModel)]="answers.immediateMeasures" 
+            name="immediateMeasures"
+            rows="6"
+            placeholder="Descriviu les accions urgents que l'empresa hauria de prendre immediatament..."></textarea>
+          <mat-hint>Accions concretes i prioritàries</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>4. Estructura d'un SGCP proposat</mat-label>
+          <textarea 
+            matInput 
+            [(ngModel)]="answers.sgcpStructure" 
+            name="sgcpStructure"
+            rows="6"
+            placeholder="Proposeu l'estructura bàsica d'un Sistema de Gestió de Compliance Penal per a aquesta empresa..."></textarea>
+          <mat-hint>Baseu-vos en la norma UNE 19601</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>5. Anàlisi de responsabilitat penal</mat-label>
+          <textarea 
+            matInput 
+            [(ngModel)]="answers.responsibilityAnalysis" 
+            name="responsibilityAnalysis"
+            rows="6"
+            placeholder="Analitzeu qui podria ser responsable penalment (persones físiques i jurídiques)..."></textarea>
+          <mat-hint>Considereu tant responsabilitats individuals com corporatives</mat-hint>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submitChallenge()">
+        <mat-icon>send</mat-icon>
+        Enviar Auditoria
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="result-card" *ngIf="showResult">
+    <mat-card-content>
+      <div class="celebration-icon">
+        <mat-icon>emoji_events</mat-icon>
+      </div>
+
+      <h1>GIMCANA COMPLETADA!</h1>
+      <h2>Enhorabona {{ currentTeam?.name }}!</h2>
+
+      <div class="final-score">
+        <div class="score-item">
+          <div class="score-label">Puntuació del desafiament final</div>
+          <div class="score-value">{{ scoreEarned }} / 100</div>
+        </div>
+
+        <div class="score-item total">
+          <div class="score-label">Puntuació Total</div>
+          <div class="score-value">{{ currentTeam?.score }}</div>
+        </div>
+      </div>
+
+      <div class="completion-message">
+        <p>Heu demostrat uns coneixements excel·lents sobre normativa de ciberseguretat, compliance penal i corrupció!</p>
+        <p>Consulteu el rànquing per veure com us compareu amb altres equips.</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="goToRanking()">
+        <mat-icon>leaderboard</mat-icon>
+        Veure Rànquing
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

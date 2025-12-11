@@ -1,0 +1,56 @@
+<div class="home-container">
+  <mat-card class="welcome-card">
+    <mat-card-header>
+      <mat-card-title>
+        <h1>GIMCANA EDUCATIVA:<br>NORMATIVA DE CIBERSEGURETAT</h1>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <h2>Una aventura pels delictes informàtics, compliance penal i corrupció</h2>
+      </mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="icon-container">
+        <mat-icon class="main-icon">security</mat-icon>
+      </div>
+      
+      <p class="description">
+        Benvinguts a la gimcana educativa sobre normativa de ciberseguretat! 
+        Prepara't per enfrontar-te a situacions reals i aprendre sobre:
+      </p>
+      
+      <ul class="topics-list">
+        <li><mat-icon>check_circle</mat-icon> Delictes informàtics</li>
+        <li><mat-icon>check_circle</mat-icon> Compliance penal (UNE 19601)</li>
+        <li><mat-icon>check_circle</mat-icon> Protecció de dades (RGPD)</li>
+        <li><mat-icon>check_circle</mat-icon> Sistemes antisuborn (ISO 37001)</li>
+      </ul>
+      
+      <div class="game-info">
+        <div class="info-item">
+          <mat-icon>groups</mat-icon>
+          <span>3-4 membres per equip</span>
+        </div>
+        <div class="info-item">
+          <mat-icon>quiz</mat-icon>
+          <span>9 qüestions + desafiament final</span>
+        </div>
+        <div class="info-item">
+          <mat-icon>emoji_events</mat-icon>
+          <span>Puntuació i rànquing</span>
+        </div>
+      </div>
+    </mat-card-content>
+    
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="startGame()" class="start-button">
+        <mat-icon>play_arrow</mat-icon>
+        Començar el Joc
+      </button>
+      <button mat-button (click)="goToTeacherMode()" class="teacher-button">
+        <mat-icon>school</mat-icon>
+        Mode Docent
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

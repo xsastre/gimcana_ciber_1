@@ -1,0 +1,93 @@
+<div class="question-container">
+  <div class="header">
+    <div class="team-info">
+      <mat-icon>group</mat-icon>
+      <span>{{ currentTeam?.name }}</span>
+    </div>
+    <div class="score-info">
+      <mat-icon>emoji_events</mat-icon>
+      <span>{{ currentTeam?.score }} punts</span>
+    </div>
+  </div>
+
+  <mat-progress-bar mode="determinate" [value]="progress" class="progress-bar"></mat-progress-bar>
+
+  <mat-card class="question-card" *ngIf="currentQuestion && !showExplanation">
+    <mat-card-header>
+      <div class="level-badge">Nivell {{ currentQuestion.level }}</div>
+      <mat-card-title>{{ currentQuestion.title }}</mat-card-title>
+      <mat-card-subtitle>Qüestió {{ currentQuestion.id }} de 9</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="situation-box">
+        <h3>
+          <mat-icon>description</mat-icon>
+          Situació
+        </h3>
+        <p>{{ currentQuestion.situation }}</p>
+      </div>
+
+      <div class="question-box">
+        <h3>
+          <mat-icon>help_outline</mat-icon>
+          Pregunta
+        </h3>
+        <p>{{ currentQuestion.question }}</p>
+      </div>
+
+      <div class="options">
+        <div 
+          class="option" 
+          *ngFor="let option of currentQuestion.options; let i = index"
+          [class.selected]="selectedOption === i"
+          (click)="selectedOption = i">
+          <div class="option-letter">{{ ['A', 'B', 'C', 'D'][i] }}</div>
+          <div class="option-text">{{ option.text }}</div>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="exitGame()">
+        <mat-icon>exit_to_app</mat-icon>
+        Sortir
+      </button>
+      <div class="right-buttons">
+        <button mat-button color="accent" (click)="showHint()" [disabled]="hasUsedHint">
+          <mat-icon>lightbulb</mat-icon>
+          {{ hasUsedHint ? 'Pista utilitzada' : 'Veure pista' }}
+        </button>
+        <button mat-raised-button color="primary" (click)="submitAnswer()">
+          <mat-icon>check</mat-icon>
+          Comprovar
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card class="explanation-card" *ngIf="showExplanation">
+    <mat-card-content>
+      <div class="result" [class.correct]="isCorrect" [class.incorrect]="!isCorrect">
+        <mat-icon>{{ isCorrect ? 'check_circle' : 'cancel' }}</mat-icon>
+        <h2>{{ isCorrect ? 'Correcte!' : 'Incorrecte' }}</h2>
+        <p class="points" *ngIf="isCorrect">+{{ pointsEarned }} punts</p>
+      </div>
+
+      <div class="explanation">
+        <h3>
+          <mat-icon>info</mat-icon>
+          Explicació
+        </h3>
+        <p>{{ currentQuestion?.explanation }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="continue()">
+        <mat-icon>{{ isCorrect ? 'arrow_forward' : 'replay' }}</mat-icon>
+        {{ isCorrect ? 'Continuar' : 'Tornar a intentar' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
