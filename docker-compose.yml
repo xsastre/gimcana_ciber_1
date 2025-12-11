@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  gimcana-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gimcana-educativa
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    labels:
+      - "com.gimcana.description=Gimcana Educativa - Normativa de Ciberseguretat"
+      - "com.gimcana.version=1.0"
