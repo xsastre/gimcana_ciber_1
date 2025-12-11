@@ -1,0 +1,74 @@
+name: Build i Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Angular App
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout codi
+        uses: actions/checkout@v4
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Instal·lar dependències
+        run: npm ci
+      
+      - name: Build de producció
+        run: npm run build
+      
+      - name: Verificar build
+        run: |
+          if [ ! -d "dist/gimcana-app/browser" ]; then
+            echo "Error: Build no s'ha generat correctament"
+            exit 1
+          fi
+          echo "Build completat amb èxit!"
+          du -sh dist/gimcana-app/browser
+      
+      - name: Pujar artefactes de build
+        uses: actions/upload-artifact@v4
+        with:
+          name: gimcana-app-build
+          path: dist/gimcana-app/browser
+          retention-days: 7
+  
+  # Exemple de desplegament a GitHub Pages (descomentar si es vol utilitzar)
+  # deploy-pages:
+  #   name: Deploy a GitHub Pages
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   
+  #   permissions:
+  #     contents: read
+  #     pages: write
+  #     id-token: write
+  #   
+  #   steps:
+  #     - name: Descarregar artefactes
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: gimcana-app-build
+  #         path: ./dist
+  #     
+  #     - name: Deploy a GitHub Pages
+  #       uses: peaceiris/actions-gh-pages@v3
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./dist
+  #         cname: elteudomain.com  # Opcional: si tens un domini personalitzat

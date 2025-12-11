@@ -1,0 +1,44 @@
+# Configuració de Netlify per a l'aplicació Angular
+
+[build]
+  # Comandament de build
+  command = "npm run build"
+  
+  # Directori on es troben els fitxers compilats
+  publish = "dist/gimcana-app/browser"
+
+# Configuració de redirects per a una Single Page Application (SPA)
+# Això assegura que totes les rutes redirigeixen a index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers de seguretat
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache per a assets estàtics
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Configuració de l'entorn Node.js
+[build.environment]
+  NODE_VERSION = "18"

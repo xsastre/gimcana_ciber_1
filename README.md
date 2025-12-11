@@ -79,7 +79,22 @@ Per compilar l'aplicació per a producció:
 npm run build
 ```
 
+O utilitzant l'script automatitzat que verifica i prepara el build:
+
+```bash
+npm run build:prod
+```
+
 Els fitxers compilats es generaran a la carpeta `dist/gimcana-app/`
+
+### Desplegament a Producció
+
+Per a instruccions detallades sobre com desplegar l'aplicació a producció (Docker, servidors web, serveis cloud, etc.), consulta la [Guia de Desplegament](DEPLOYMENT.md).
+
+**Opcions ràpides de desplegament:**
+
+- **Docker**: `docker-compose up -d`
+- **Build i servir**: Consulta [DEPLOYMENT.md](DEPLOYMENT.md) per a més opcions
 
 ## Ús de l'Aplicació
 
